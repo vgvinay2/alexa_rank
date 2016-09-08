@@ -1,0 +1,29 @@
+<div class="container">
+<ul class="nav nav-tabs">
+<% if user_signed_in? %>
+  Logged in as <strong><%= current_user.email %></strong>.
+  <li role="presentation" class="active"><%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %></li>
+  <li role="presentation" class="active"><%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %></li>
+<% else %>
+  
+  <li role="presentation" class="active"><%= link_to "Login", new_user_session_path %></li>
+  <li role="presentation"><%= link_to "Sign up", new_user_registration_path  %> </li>
+
+<% end %>
+</ul>
+<%= form_for(resource, as: resource_name,html:  {class: "form-signin"}, url: session_path(resource_name)) do |f| %>
+    <%= f.label :email,class: "sr-only" %>
+    <%= f.email_field :email,class: "form-control", autofocus: true %>
+  <div class="field">
+    <%= f.label :password,class: "sr-only" %>
+    <%= f.password_field :password,class: "form-control", autocomplete: "off" %>
+  </div>
+ <% if devise_mapping.rememberable? -%>
+      <%= f.check_box :remember_me %>
+      <%= f.label :remember_me %>
+  <% end -%>
+ <%= f.submit "Log in", class: "btn btn-lg btn-primary btn-block" %>
+<% end %>
+<%#= render "devise/shared/links" %>
+    </div> 
+

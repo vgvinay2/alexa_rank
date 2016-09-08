@@ -1,0 +1,21 @@
+<div class="container">
+
+  <ul class="nav nav-tabs">
+<% if user_signed_in? %>
+  <li role="presentation" class="active">
+   <%= link_to 'Dashboard', '' %></li>
+  <li role="presentation" class="pull-right">
+   <%= link_to 'Edit profile', edit_user_registration_path %></li>
+  <li role="presentation" class="pull-right">
+  	<%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
+<% else %>
+<li role="presentation" class="active"><%= link_to "Login", new_user_session_path %></li>
+  <li role="presentation"><%= link_to "Sign up", new_user_registration_path  %> </li>
+<% end %>
+</ul>
+<div class="text-right">
+  Logged in as <strong><%= current_user.email %></strong></div>
+welcome !!
+
+    </div> 
+
