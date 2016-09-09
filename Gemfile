@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-
+# doc.css('strong.metrics-data.align-vmiddle').children[2].text
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
 # Use sqlite3 as the database for Active Record

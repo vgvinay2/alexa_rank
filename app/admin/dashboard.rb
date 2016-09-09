@@ -12,7 +12,7 @@ ActiveAdmin.register_page "Dashboard" do
 
     columns do
       column do
-        panel "Recent Posts" do
+        panel "Recent Rank" do
          table_for User.all do
           column("Email") do |user|
             link_to user.email, edit_admin_user_path(user)
@@ -27,5 +27,9 @@ ActiveAdmin.register_page "Dashboard" do
      end
    end
  end
+
+
+
+ 
 end
 end
