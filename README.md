@@ -6,6 +6,7 @@
 To run this application first download it.  
 
  ```console
+ git clone https://github.com/vgvinay2/alexa_rank.git
  cd alexa_rank 
  bundle install
  rake db:create db:migrate
