@@ -10,4 +10,8 @@ module ApplicationHelper
 	def devise_mapping
 		@devise_mapping ||= Devise.mappings[:user]
 	end
+
+	def get_rank_data
+		Rank.pluck("DATE(created_at)")
+	end
 end

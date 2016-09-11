@@ -11,11 +11,11 @@ $(function () {
             x: -20
         },
         xAxis: {
-            categories: <%=raw(Rank.pluck("DATE(created_at)")) %>
+            categories: <%=raw(get_rank_data) %>
         },
         yAxis: {
             title: {
-                text: 'Date'
+                text: 'Global Rank'
             },
             plotLines: [{
                 value: 0,
@@ -24,7 +24,7 @@ $(function () {
             }]
         },
         tooltip: {
-            valueSuffix: '°C'
+            valueSuffix: 'Global Rank'
         },
         legend: {
             layout: 'vertical',
@@ -37,8 +37,8 @@ $(function () {
             data: <%=raw(current_user.site_urls.first.ranks.pluck(:global_rank)) %>
         },
         {
-            name: '<%=(current_user.site_urls.second.site_name) %>',
-            data: <%=raw(current_user.site_urls.second.ranks.pluck(:global_rank)) %>
+            name: '<%=(current_user.site_urls.second.site_name) rescue "Not defined" %>',
+            data: <%=raw(current_user.site_urls.second.ranks.pluck(:global_rank)) rescue 0 %>
         },
         {
             name: '<%=(current_user.site_urls.third.site_name) rescue "Not defined" %>',
