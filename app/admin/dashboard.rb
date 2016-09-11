@@ -10,11 +10,11 @@ ActiveAdmin.register_page "Dashboard" do
           column("Email") do |user|
             link_to user.email, edit_admin_user_path(user)
           end
-         column("Name") do |user|
-           user.name
-         end
+         column :site_name do |timesheet|
+             timesheet.site_urls.pluck(:site_name).join(' ') 
+          end
          column("Admin") do |user|
-           user.admin
+           user.admin== true ?  status_tag( "yes", :ok ) : status_tag( "no" )
          end
        end
      end
