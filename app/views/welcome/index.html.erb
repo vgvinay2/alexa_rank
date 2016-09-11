@@ -20,10 +20,30 @@
         <%= raw(text_field_tag :search, params[:search], placeholder: "Search",class: "form-control",required: true) %>
         <%= submit_tag  'submit',class: "btn btn-sm btn-primary" %>
         <%end%>
+
+
       </div>
-      <% current_user.site_urls.each do |site|%>
-      <%= site.site_name %>
+   <table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Serial No</th>
+      <th>Site Name</th>
+      <th> Recent Global Rank</th>
+      <th>Recent Local Rank</th>
+    </tr>
+  </thead>
+  <tbody>
+     <% current_user.site_urls.each_with_index do |site,index|%>
+    <tr>
+      <th scope="row"> &nbsp; <%= index+1%></th>
+      <td> &nbsp; <%= site.site_name %></td>
+      <td >  &nbsp; &nbsp;<%= get_global_rank(site) %></td>
+      <td> &nbsp; &nbsp; <%= get_local_rank(site) %></td>
+    </tr>
+    <%end%>
+  </tbody>
+</table>
+   <% current_user.site_urls.each do |site|%>
       <%= render 'rank_graph', site: site %>
-      <%= site.ranks.pluck(:global_rank,:local_rank) if site.ranks %>
       <%end%></br> 
 </div> 
