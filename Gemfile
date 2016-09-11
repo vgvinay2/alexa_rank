@@ -49,3 +49,4 @@ gem 'devise'
 gem 'nokogiri'
 gem 'activeadmin', github: 'activeadmin'
 gem 'devise'
+gem 'whenever', require: false

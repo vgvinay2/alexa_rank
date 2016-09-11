@@ -16,21 +16,21 @@
 <div class="text-right">
   Logged in as <strong><%= current_user.email if current_user %></strong>
 </div> 
-      <div class="row">
-  <%  @my_value.each do |rank| %>
-  <% if rank[:global_rank] %>
-Global Rank  <%= rank[:global_rank]   %>
-<% end %>
-<% if rank[:india_rank]%>
-India Rank:  <%= rank[:india_rank]   %>
-  <% end %>
-  <% end %> 
-</div>
+ 
     <div class="center_form" >
       <%= form_tag('', :method => "get",:class=>"navbar-form navbar-left" ) do %>
       <%= raw(text_field_tag :search, params[:search], placeholder: "Search",class: "form-control",required: true) %>
       <%= submit_tag  'submit',class: "btn btn-sm btn-primary" %>
-      <%end%> 
-</div>
-    </div> 
+      <%end%>
+        </div>
+          <% current_user.site_urls.each do |site|%>
+<%= site.site_name %>
+<%= render 'rank_graph', site: site %>
+<%= site.ranks.pluck(:global_rank,:local_rank) if site.ranks %>
+<%end%></br> 
 
+
+
+
+<%#= @test = Ran.pluck(:id)#.all.map{|u| u.created_at.strftime("%m/%d/%Y") } %>
+    </div> 

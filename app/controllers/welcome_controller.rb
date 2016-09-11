@@ -3,14 +3,20 @@ require 'nokogiri'
 require 'open-uri'
   
   def index
-  	if params[:search]
-	  url = "http://www.alexa.com/siteinfo/#{params[:search]}"
-	  doc = Nokogiri::HTML(open(url))
-	  @my_value = Array.new
-	  @my_value <<  { global_rank: doc.css('strong.metrics-data.align-vmiddle').children[2].text.strip.to_i }
-	  @my_value <<  { india_rank:   doc.css('strong.metrics-data.align-vmiddle').children[3].text.strip.to_i }
+    if params[:search] && current_user.site_urls.count < SiteUrl::SITECOUNT 
+	    url = "http://www.alexa.com/siteinfo/#{params[:search]}"
+	    doc = Nokogiri::HTML(open(url))
+	    if doc.css('strong.metrics-data.align-vmiddle').present? 
+        current_site_url = current_user.site_urls.find_or_create_by(site_name: params[:search])
+	      global_rank = { global_rank: doc.css('strong.metrics-data.align-vmiddle').children[2].text.strip.to_i }
+	      local_rank = { local_rank:   doc.css('strong.metrics-data.align-vmiddle').children[3].text.strip.to_i }
+	      rank = global_rank .merge(local_rank)
+        current_site_url.ranks.create rank if current_site_url.ranks.exists_rank.blank? 
+      else
+        flash[:notice] = "Please enter correct domain name" 
+      end
     else
-    	@my_value = Array.new
+      flash[:notice] = "You can check only 3 site rank"
     end  
   end
 end

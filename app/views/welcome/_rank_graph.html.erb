@@ -1,0 +1,51 @@
+<div id="mycontainer" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+<script type="text/javascript">
+$(function () {
+    $('#mycontainer').highcharts({
+        title: {
+            text: 'Daily Global Ranking',
+            x: -20 //center
+        },
+        subtitle: {
+            text: 'Source: http://www.alexa.com/',
+            x: -20
+        },
+        xAxis: {
+            categories: <%=raw(Rank.pluck("DATE(created_at)")) %>
+        },
+        yAxis: {
+            title: {
+                text: 'Date'
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        tooltip: {
+            valueSuffix: '°C'
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            borderWidth: 0
+        },
+        series: [ {
+            name: '<%=(current_user.site_urls.first.site_name) %>',
+            data: <%=raw(current_user.site_urls.first.ranks.pluck(:global_rank)) %>
+        },
+        {
+            name: '<%=(current_user.site_urls.second.site_name) %>',
+            data: <%=raw(current_user.site_urls.second.ranks.pluck(:global_rank)) %>
+        },
+        {
+            name: '<%=(current_user.site_urls.third.site_name) rescue "Not defined" %>',
+            data: <%=raw(current_user.site_urls.third.ranks.pluck(:global_rank)) rescue 0 %>
+        }
+
+        ]
+    });
+});
+    </script>
