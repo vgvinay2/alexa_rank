@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160909185548) do
+ActiveRecord::Schema.define(version: 20160913121242) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -29,11 +29,11 @@ ActiveRecord::Schema.define(version: 20160909185548) do
   add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
 
   create_table "ranks", force: :cascade do |t|
-    t.integer  "global_rank"
-    t.integer  "local_rank"
+    t.string   "global_rank", default: "0"
+    t.string   "local_rank",  default: "0"
     t.integer  "site_url_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
   create_table "site_urls", force: :cascade do |t|
