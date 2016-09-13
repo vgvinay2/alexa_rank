@@ -1,7 +1,6 @@
 
 ## Alexa Rank
 
-### Alexa Rank application  [http://csnipp.com/coderhs/1256]
 
 To run this application first download it.  
 
